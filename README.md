@@ -69,10 +69,10 @@ Override them in a `.env` as in the [.env.example](.env.example) file:
 
 | Key                      | Example                 | Purpose                                                            |
 | ------------------------ | ----------------------- | ------------------------------------------------------------------ |
-| `MYSQL_ROOT_PASSWORD`    | `ChangeThisRootPwd123!` | Root password used only for administration tasks. **Keep secret.** |
+| `MYSQL_ROOT_PASSWORD`    | `ChangeThisRootPassword` | Root password used only for administration tasks. **Keep secret.** |
 | `MYSQL_DATABASE`         | `wordpress`             | Database name WordPress will use.                                  |
 | `MYSQL_USER`             | `wp_user`               | Application DB user (non‑root).                                    |
-| `MYSQL_PASSWORD`         | `ChangeThisAppPwd123!`  | Password for `MYSQL_USER`.                                         |
+| `MYSQL_PASSWORD`         | `ChangeThisAppPassword`  | Password for `MYSQL_USER`.                                         |
 | `HTTP_PORT`              | `8080`                  | Host port mapped to the container’s port 80.                       |
 | `WORDPRESS_TABLE_PREFIX` | `wp_`                   | DB table prefix (change from default for isolation).               |
 | `WORDPRESS_DEBUG`        | `0`                     | Enable verbose debugging (`1`) only in development.                |
