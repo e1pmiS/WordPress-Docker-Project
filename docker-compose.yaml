@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: ${DB_CONTAINER_NAME:-wp-db}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?set in .env}
+      MYSQL_USER: ${MYSQL_USER:?set in .env}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?set in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set in .env}
+    volumes:
+      - ${DB_DATA_DIR:-./db_data}:/var/lib/mysql
+    restart: unless-stopped
+
+  wordpress:
+    image: wordpress:6.6-apache
+    container_name: ${WP_CONTAINER_NAME:-wordpress}
+    depends_on:
+      - db
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:?set in .env}
+      WORDPRESS_DB_USER: ${MYSQL_USER:?set in .env}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:?set in .env}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX:-wp_}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-0}
+    volumes:
+      - ${WP_CONTENT_DIR:-./wp-content}:/var/www/html/wp-content
+    restart: unless-stopped
